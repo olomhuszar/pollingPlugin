@@ -17,7 +17,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="URIPoller">
-                <param name="android-package" value="hu.spot.taxi.pollingPlugin.URIPoller.java"/>
+                <param name="android-package" value="hu.spot.taxi.pollingPlugin.URIPoller"/>
             </feature>
         </config-file>
         <source-file src="src/android/URIPoller.java" target-dir="src/hu/spot/taxi/pollingPlugin" />      
