@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="org.devgirl.calendar"
+      version="0.1.0">
+    <name>URI Poller</name>
+    <description>URI Poller plugin</description>
+    <license>MIT</license>
+    <keywords>phonegap,poller</keywords>
+ 
+ 
+    <js-module src="www/uripoller.js" name="URIPoller">
+        <clobbers target="window.uripoller" />
+    </js-module>
+ 
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="URIPoller">
+                <param name="android-package" value="hu.spot.taxi.pollingPlugin.URIPoller.java"/>
+            </feature>
+        </config-file>
+        <source-file src="src/android/URIPoller.java" target-dir="src/hu/taxi/pollingPlugin" />      
+     </platform>          
+</plugin>
