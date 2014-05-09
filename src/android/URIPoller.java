@@ -15,8 +15,8 @@ public class URIPollerURIPoller extends CordovaPlugin {
 		try {
 			if (ACTION_START_POLLING.equals(action)) { 
 				JSONObject arguments = args.getJSONObject(0);
-				String token = arguments.getString('token');
-				Intent calIntent = new Intent(Intent.ACTION_EDIT)
+				String token = arguments.getString("token");
+				/*Intent calIntent = new Intent(Intent.ACTION_EDIT)
 					.setType("vnd.android.cursor.item/event")
 					.putExtra("beginTime", arg_object.getLong("startTimeMillis"))
 					.putExtra("endTime", arg_object.getLong("endTimeMillis"))
@@ -24,7 +24,7 @@ public class URIPollerURIPoller extends CordovaPlugin {
 					.putExtra("description", arg_object.getString("description"))
 					.putExtra("eventLocation", arg_object.getString("eventLocation"));
 
-				this.cordova.getActivity().startActivity(calIntent);
+				this.cordova.getActivity().startActivity(calIntent);*/
 				callbackContext.success();
 				return true;
 			}
