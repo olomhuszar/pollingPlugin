@@ -19,6 +19,6 @@
                 <param name="android-package" value="hu.spot.taxi.pollingPlugin.URIPoller.java"/>
             </feature>
         </config-file>
-        <source-file src="src/android/URIPoller.java" target-dir="src/hu/taxi/pollingPlugin" />      
+        <source-file src="src/android/URIPoller.java" target-dir="src/hu/spot/taxi/pollingPlugin" />      
      </platform>          
 </plugin>
