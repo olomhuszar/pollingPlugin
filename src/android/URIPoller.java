@@ -18,6 +18,11 @@ public class URIPoller extends CordovaPlugin {
 				JSONObject arguments = args.getJSONObject(0);
 				String token = arguments.getString("token");
 				callbackContext.success(token.toUpperCase());
+				Context context=this.cordova.getActivity().getApplicationContext();
+			    //or Context context=cordova.getActivity().getApplicationContext();
+			    Intent intent=new Intent(context,Next_Activity.class);
+
+			    context.startActivity(intent);
 				return true;
 			} else if (ACTION_STOP_POLLING.equals(action)) { 
 				callbackContext.success("B1ad88bce3");
