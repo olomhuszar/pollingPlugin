@@ -10,22 +10,17 @@ import android.content.Intent;
 
 public class URIPoller extends CordovaPlugin {
 	public static final String ACTION_START_POLLING = "startPolling";
+	public static final String ACTION_STOP_POLLING = "stopPolling";
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		try {
 			if (ACTION_START_POLLING.equals(action)) { 
 				JSONObject arguments = args.getJSONObject(0);
 				String token = arguments.getString("token");
-				/*Intent calIntent = new Intent(Intent.ACTION_EDIT)
-					.setType("vnd.android.cursor.item/event")
-					.putExtra("beginTime", arg_object.getLong("startTimeMillis"))
-					.putExtra("endTime", arg_object.getLong("endTimeMillis"))
-					.putExtra("title", arg_object.getString("title"))
-					.putExtra("description", arg_object.getString("description"))
-					.putExtra("eventLocation", arg_object.getString("eventLocation"));
-
-				this.cordova.getActivity().startActivity(calIntent);*/
-				callbackContext.success();
+				callbackContext.success(token.toUpperCase());
+				return true;
+			} else if (ACTION_STOP_POLLING.equals(action)) { 
+				callbackContext.success("B1ad88bce3");
 				return true;
 			}
 			callbackContext.error("Invalid action");
