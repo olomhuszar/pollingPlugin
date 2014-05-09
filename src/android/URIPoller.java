@@ -8,7 +8,7 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Intent;
 
-public class URIPollerURIPoller extends CordovaPlugin {
+public class URIPoller extends CordovaPlugin {
 	public static final String ACTION_START_POLLING = "startPolling";
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
