@@ -17,9 +17,9 @@ public class URIPoller extends CordovaPlugin {
 			if (ACTION_START_POLLING.equals(action)) { 
 				JSONObject arguments = args.getJSONObject(0);
 				String token = arguments.getString("token");
-				Context context=this.cordova.getActivity().getApplicationContext();
+				/*Context context=this.cordova.getActivity().getApplicationContext();
 			    Intent intent=new Intent(context,Next_Activity.class);
-			    context.startActivity(intent);
+			    context.startActivity(intent);*/
 				callbackContext.success(token.toUpperCase());
 				
 				return true;
