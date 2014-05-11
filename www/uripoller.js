@@ -1,5 +1,5 @@
 var uripoller =  {
-    startEvent: function(token, state, successCallback, errorCallback) {
+    startEvent: function( serverAddress, token, successCallback, errorCallback) {
         cordova.exec(
             successCallback,
             errorCallback,
@@ -7,7 +7,7 @@ var uripoller =  {
             'startPolling',
             [{
                 "token": token,
-                "state": state
+                "serverAddress": serverAddress
             }]
         );
     },

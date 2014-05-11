@@ -21,5 +21,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </feature>
         </config-file>
         <source-file src="src/android/URIPoller.java" target-dir="src/hu/spot/taxi/pollingPlugin" />      
+        <source-file src="src/android/MyPollingService.java" target-dir="src/hu/spot/taxi/pollingPlugin" />      
      </platform>          
 </plugin>
