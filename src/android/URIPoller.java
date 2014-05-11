@@ -80,6 +80,7 @@ public class URIPoller extends CordovaPlugin {
 		@Override
 		public void onServiceConnected(ComponentName name, IBinder service) {
 			pollerBinder = (MyPollerBinder) service;
+	    	pollerBinder.setServerAddress(serverAddress);
 			pollerBinder.setToken(token);
 			Log.d("CordovaLog", "Token at serviceConnected: " + token);
 		}
