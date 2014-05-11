@@ -44,10 +44,10 @@ public class MyPollingService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-    	if( token == null ) return START_STICKY;
-        Log.d("CordovaLog", "Polling url with token: " + token );
+        if( token == null ) return START_STICKY;
         try {
             String fullUrl = serverAddress + "?silent=1&token=" +  token;
+            Log.d("CordovaLog", "Polling: " + fullUrl );
             url = new URL(fullUrl);
             isPolling = true;
             URLConnection conn = url.openConnection();
@@ -61,19 +61,22 @@ public class MyPollingService extends Service {
                     status = jsonObject.getString("status");
             }
             if(!status.equals("nothing")) {
-            	Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-				Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-				r.play();
-				Toast.makeText(getApplicationContext(),"Önhöz új esemény érkezett, kürjük térjen vissza a Spot!-hoz",Toast.LENGTH_LONG).show();
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                Toast.makeText(getApplicationContext(),"Önnek új eseménye érkezett, kérjük térjen vissz a Spot!-hoz",Toast.LENGTH_LONG).show();
             }
             br.close();
         } catch (MalformedURLException e) {
+            Log.d("CordovaLog", "Polling failed, malformed....");
             e.printStackTrace();
         } catch (IOException e) {
+            Log.d("CordovaLog", "Polling failed, IO....");
             e.printStackTrace();
         } catch (JSONException e) {
-			e.printStackTrace();
-		}
+            Log.d("CordovaLog", "Polling failed, json....");
+            e.printStackTrace();
+        }
         isPolling = false;
         return START_STICKY;
     }
@@ -86,28 +89,28 @@ public class MyPollingService extends Service {
     }
 
     @Override
-	public IBinder onBind(Intent intent) {
-    	return myPollerBinder;
-	}
+    public IBinder onBind(Intent intent) {
+        return myPollerBinder;
+    }
     public class MyPollerBinder extends Binder {
-    	public void setToken(String t) {
-    		token = t;
-    	}
-    	public String getToken() {
-    		return token;
-    	}
-    	public Boolean tokenSafe() {
-    		return !isPolling;
-    	}
-    	public void setServerAddress(String address) {
-    		serverAddress = address;
-    	}
-    	public void stopPolling() {
-    		Intent intentstop = new Intent(MyPollingService.this, MyPollingService.class);
+        public void setToken(String t) {
+            token = t;
+        }
+        public String getToken() {
+            return token;
+        }
+        public Boolean tokenSafe() {
+            return !isPolling;
+        }
+        public void setServerAddress(String address) {
+            serverAddress = address;
+        }
+        public void stopPolling() {
+            Intent intentstop = new Intent(MyPollingService.this, MyPollingService.class);
             PendingIntent senderstop = PendingIntent.getService(MyPollingService.this,0, intentstop, 0);
             AlarmManager alarmManagerstop = (AlarmManager) MyPollingService.this.getSystemService(Context.ALARM_SERVICE);
             alarmManagerstop.cancel(senderstop);
             Log.d("CordovaLog", "Polling ended");
-    	}
+        }
     }
 }

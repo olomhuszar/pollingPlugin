@@ -21,7 +21,8 @@ public class URIPoller extends CordovaPlugin {
 	public static final String ACTION_START_POLLING = "startPolling";
 	public static final String ACTION_STOP_POLLING = "stopPolling";
 	private Intent serviceHandler;
-	private String token = "unset";
+	private String token = null;
+	private String serverAddress = null;
 	private MyPollerBinder pollerBinder = null;
 	@Override
 	public boolean execute(String action, JSONArray args,
@@ -30,9 +31,10 @@ public class URIPoller extends CordovaPlugin {
 			if (ACTION_START_POLLING.equals(action)) {
 				JSONObject arguments = args.getJSONObject(0);
 				token = arguments.getString("token");
+				serverAddress = arguments.getString("serverAddress");
 				cordova.getThreadPool().execute(new Runnable() {
 				    public void run() {
-						startService(token);
+						startService(token,serverAddress);
 						Log.d("CordovaLog", "Token from JS: " + token);
 						callbackContext.success(token); 
 				    }
@@ -59,11 +61,13 @@ public class URIPoller extends CordovaPlugin {
 		}
 	}
 
-	public void startService( String token ) {
+	public void startService( String token, String address ) {
 	    serviceHandler = new Intent(cordova.getActivity(), MyPollingService.class);
 	    Log.d("CordovaLog", "init bindservice with token: " + token);
-	    if(pollerBinder != null && pollerBinder.isBinderAlive())
+	    if(pollerBinder != null && pollerBinder.isBinderAlive()) {
+	    	pollerBinder.setServerAddress(address);
 	    	pollerBinder.setToken(token);
+	    }
 	    cordova.getActivity().bindService(serviceHandler, mConnection, Context.BIND_AUTO_CREATE);
 	}
 	public void stopService() {
