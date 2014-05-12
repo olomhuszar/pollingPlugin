@@ -58,13 +58,14 @@ public class MyPollingService extends Service {
                     Log.d("CordovaLog", "Got: " + inputLine);
                     JSONObject jsonObject = new JSONObject(inputLine);
                     token = jsonObject.getString("token");
-                    status = jsonObject.getString("status");
+                    status = jsonObject.getString("type");
             }
             if(!status.equals("nothing")) {
+                Log.d("CordovaLog", "Should sign now");
                 Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
                 r.play();
-                Toast.makeText(getApplicationContext(),"Önnek új eseménye érkezett, kérjük térjen vissz a Spot!-hoz",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Önnek új eseménye értkezett, téjen vissza a Spot!-hoz",Toast.LENGTH_LONG).show();
             }
             br.close();
         } catch (MalformedURLException e) {
